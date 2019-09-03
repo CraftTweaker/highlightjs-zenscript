@@ -2,7 +2,6 @@
   "name": "highlightjs-zenscript",
   "version": "1.0.0",
   "description": "ZenScript syntax highlighting with highlight.js",
-  "main": "index.js",
   "scripts": {
     "build": "microbundle build --no-compress",
     "lint": "eslint . --fix",
@@ -25,6 +24,10 @@
     "highlightjs"
   ],
   "author": "Jaredlll08",
+  "main": "dist/highlightjs-zenscript.js",
+  "umd:main": "dist/highlightjs-zenscript.umd.js",
+  "module": "dist/highlightjs-zenscript.mjs",
+  "source": "index.js",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/CraftTweaker/highlightjs-zenscript/issues"

@@ -1,3 +1,8 @@
+/*
+Language: ZenScript
+Author: Jared Luboff <jluboff8@gmail.com>
+Description: ZenScript language support
+*/
 const module = module ? module : {}; // shim for browser use
 
 function hljsZenScript(hljs) {
