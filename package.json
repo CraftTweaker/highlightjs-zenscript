@@ -1,0 +1,33 @@
+{
+  "name": "highlightjs-zenscript",
+  "version": "1.0.0",
+  "description": "ZenScript syntax highlighting with highlight.js",
+  "main": "index.js",
+  "scripts": {
+    "build": "microbundle build --no-compress",
+    "lint": "eslint . --fix",
+    "test": "npm run lint",
+    "watch": "microbundle watch --no-compress"
+  },
+  "devDependencies": {
+    "highlightjs": "^9.12.0",
+    "eslint": "^6.0.1",
+    "eslint-config-eslint": "^5.0.1",
+    "eslint-plugin-node": "^9.1.0",
+    "microbundle": "^0.11.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CraftTweaker/highlightjs-zenscript.git"
+  },
+  "keywords": [
+    "zenscript",
+    "highlightjs"
+  ],
+  "author": "Jaredlll08",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CraftTweaker/highlightjs-zenscript/issues"
+  },
+  "homepage": "https://github.com/CraftTweaker/highlightjs-zenscript"
+}

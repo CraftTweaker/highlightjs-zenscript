@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <title>Test</title>
+    <script src = "index.js"></script>
+    <link rel = "stylesheet"
+          href = "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css">
+    <script src = "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+
+    <script>
+        hljs.registerLanguage("zenscript", hljsZenScript);
+        hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<pre><code class = "zenscript">import crafttweaker.api.data.StringData;
+import crafttweaker.api.data.ShortData;
+import crafttweaker.api.data.MapData;
+import crafttweaker.api.data.ListData;
+import crafttweaker.api.data.IData;
+
+var tag = new MapData();
+var enchants = new ListData();
+var enchantEff = new MapData();
+enchantEff.put("lvl", new ShortData(1));
+enchantEff.put("id", new StringData("minecraft:efficiency"));
+enchants.add(enchantEff);
+tag.put("Enchantments", enchants);
+
+/*
+mods.prestige.Rewards.registerRewardCondition("mystcraft", function(world as IWorld, player as IPlayer){
+    return player.dimension == 0;
+});
+*/
+
+////
+//
+//Disable Prestige Rewards in certain world types
+//
+////
+
+//Disable Mystcraft Prestige dimension in Compact Sky World
+mods.prestige.Rewards.registerRewardCondition("mystcraft", function(world as IWorld, player as IPlayer){
+    return mods.topography.Info.getPreset() != "Compactsky";
+});
+
+//Disable Mystcraft and Twilight Forest dimensions Prestige in Bedrock Your World
+mods.prestige.Rewards.registerRewardCondition("mystcraft", function(world as IWorld, player as IPlayer){
+    return mods.topography.Info.getPreset() != "Bedrock Your World";
+});
+
+mods.prestige.Rewards.registerRewardCondition("twilightforest", function(world as IWorld, player as IPlayer){
+    return mods.topography.Info.getPreset() != "Bedrock Your World";
+});
+
+//
+//Disabled ProjectE until the mod is fixed
+//
+mods.prestige.Rewards.registerRewardCondition("projecte", function(world as IWorld, player as IPlayer){
+    return false;});
+
+mods.prestige.Rewards.registerRewardCondition("projecte_world", function(world as IWorld, player as IPlayer){
+    return false;
+});
+    import mods.modularmachinery.RecipeBuilder;
+import mods.modularmachinery.RecipePrimer;
+import crafttweaker.item.IItemStack;
+
+val furnace_recipes = furnace.all;
+val furnace_values = [ [ 180, 1, 20 ], [ 160, 1, 40 ], [ 160, 2, 80 ], [ 80, 2, 100 ] ] as int[][];
+val furnace_names = [ "mmd_redstone_furnace", "mmd_advanced_furnace", "mmd_arc_furnace", "mmd_superheated_furnace" ] as string[];
+
+for rec in furnace_recipes {
+    for idx, entry in furnace_values {
+        val machine_n as string = furnace_names[idx];
+        val input_name as string = rec.input.name;
+        val output_name as string = rec.output.name;
+        val rec_n as string = input_name ~ "_to_" ~ output_name ~ "_for_" ~ machine_n;
+        val time as int = entry[0];
+        val ioamount as int = entry[1];
+        val energy as int = entry[2];
+        val inputItem as IItemStack = rec.input.withAmount(ioamount);
+        val outputItem as IItemStack = rec.output.withAmount(ioamount);
+        val rec_p as RecipePrimer = RecipeBuilder.newBuilder(rec_n, machine_n, time);
+        rec_p.addItemInput(inputItem);
+        rec_p.addItemOutput(outputItem);
+        rec_p.addEnergyPerTickInput(energy);
+        rec_p.build();
+    }
+}
+    recipes.addShapeless(&quot;claytomore&quot;, &lt;item:minecraft:clay&gt; * 8, [&lt;item:minecraft:water_bucket&gt;, &lt;item:minecraft:clay_ball&gt;,&lt;item:minecraft:clay_ball&gt;,&lt;item:minecraft:clay_ball&gt;,&lt;item:minecraft:clay_ball&gt;,&lt;item:minecraft:clay_ball&gt;,&lt;item:minecraft:clay_ball&gt;,&lt;item:minecraft:clay_ball&gt;,&lt;item:minecraft:clay_ball&gt;], null);
+
+
+    recipes.addShapedMirrored(&quot;shaped_test&quot;, &lt;item:minecraft:furnace&gt;, [[&lt;item:minecraft:diamond&gt;, &lt;item:minecraft:diamond&gt;,&lt;item:minecraft:diamond&gt;], [&lt;item:minecraft:diamond&gt;, &lt;item:minecraft:air&gt;, &lt;item:minecraft:diamond&gt;], [&lt;item:minecraft:diamond&gt;,&lt;item:minecraft:diamond&gt;,&lt;item:minecraft:diamond&gt;]], null);
+
+    recipes.addShaped(&quot;shaped_mirror_test&quot;, &lt;item:minecraft:arrow&gt;, [[&lt;item:minecraft:diamond&gt;, &lt;item:minecraft:diamond&gt;], [&lt;item:minecraft:air&gt;, &lt;item:minecraft:flint&gt;], [&lt;item:minecraft:air&gt;, &lt;item:minecraft:flint&gt;]], null);
+
+</code></pre>
+</body>
+</html>
