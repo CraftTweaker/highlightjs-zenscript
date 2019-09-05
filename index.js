@@ -10,37 +10,54 @@ function hljsZenScript(hljs) {
         aliases: ["zenscript", "zs"],
         keywords: {
             keyword:
-                "in has void as version for return while break instanceof export new public expand extern interface continue enum virtual class throws const private implements get alias struct function if else",
+                "import var val in has void as version for return while break instanceof export new public expand extern interface continue enum virtual class throws const private implements get alias struct function if else false true null",
             title:
-                "import",
+                " < >",
             literal:
-                "false true null ",
+                "",
             built_in:
-                "var val"
+                ""
         },
         contains: [
             {
-                className: "string",
-                begin: "'",
-                end: "'",
-                contains: [hljs.BACKSLASH_ESCAPE, {begin: "''"}],
-                relevance: 0
+                className: "keyword",
+                begin: "<",
+                contains: [
+                    {
+                        className: "literal",
+                        begin: "\\w+",
+                        end: ":|>",
+                        excludeEnd: true, endsWithParent: true
+                    }
+                ]
             },
             {
-                className: "string",
-                begin: "\"",
-                end: "\"",
-                contains: [hljs.BACKSLASH_ESCAPE, {begin: "\"\""}],
-                relevance: 0
+                className: "section",
+                begin: "\\w+\\.",
             },
             {
-                className: "attribute",
-                begin: "(\\.\\.|\\+=|\\+|-=|-|\\*=|\\*|\\/=|\\/|%=|%|\\|=|\\||\\|\\||&=|&&|&|\\^=|\\^|\\?|:|~=|~|;|<=|<|>=|>|==|=|!=|!|\\$)"
+                className: "section",
+                begin: "\\s\\w+\\.",
             },
-            hljs.C_NUMBER_MODE,
-            hljs.COMMENT("//", "$"),
+            {
+                className: "keyword",
+                begin: ";"
+            },
+            {
+                className: "title",
+                begin: "\\(|\\)|\\{|\\}|\\[|\\]",
+            },
+            {
+                className: "variable",
+                begin: "as\\s",
+                end: "\\w+",
+                excludeBegin: true
+            },
+            hljs.C_LINE_COMMENT_MODE,
             hljs.C_BLOCK_COMMENT_MODE,
-            hljs.COMMENT("\\(\\*", "\\*\\)")
+            hljs.C_NUMBER_MODE,
+            hljs.QUOTE_STRING_MODE,
+            hljs.HASH_COMMENT_MODE,
         ]
     };
 }

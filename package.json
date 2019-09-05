@@ -1,6 +1,6 @@
 {
   "name": "highlightjs-zenscript",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "ZenScript syntax highlighting with highlight.js",
   "scripts": {
     "build": "microbundle build --no-compress",
