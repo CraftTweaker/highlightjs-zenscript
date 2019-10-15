@@ -25,12 +25,12 @@ npm install highlightjs highlightjs-zenscript --save
     ```
    
 If you're using webpack / rollup / browserify / node:
-    ```javascript
-    var hljs = require('highlightjs');
-    var hljsDefineZenScript = require('highlightjs-zenscript');
-    
-    hljsZenScript(hljs);
-    hljs.initHighlightingOnLoad();
-    ```
+```javascript
+var hljs = require('highlightjs');
+var hljsDefineZenScript = require('highlightjs-zenscript');
+
+hljsZenScript(hljs);
+hljs.initHighlightingOnLoad();
+```
 
 2. Specify `zenscript` as the language when highlighting code.
