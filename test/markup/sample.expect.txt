@@ -1,14 +1,25 @@
-<span class="hljs-section">User-agent</span>: <span class="hljs-string">*</span>
-<span class="hljs-built_in">Disallow</span>: <span class="hljs-string">/search</span>
-<span class="hljs-built_in">Allow</span>: <span class="hljs-string">/search/about</span>
+<span class="hljs-comment">#loader setupCommon</span>
 
-<span class="hljs-comment"># AdsBot</span>
-<span class="hljs-section">User-agent</span>: <span class="hljs-string">AdsBot-Google</span>
-<span class="hljs-built_in">Disallow</span>: <span class="hljs-string">/maps/api/js/</span>
-<span class="hljs-built_in">Allow</span>: <span class="hljs-string">/maps/api/js</span>
+<span class="hljs-keyword">import</span><span class="hljs-section"> crafttweaker.</span><span class="hljs-section">api.</span><span class="hljs-section">commands.</span><span class="hljs-section">custom.</span>CustomCommands<span class="hljs-keyword">;</span>
+<span class="hljs-keyword">import</span><span class="hljs-section"> crafttweaker.</span><span class="hljs-section">api.</span><span class="hljs-section">commands.</span><span class="hljs-section">custom.</span>MCCommand<span class="hljs-keyword">;</span>
+<span class="hljs-keyword">import</span><span class="hljs-section"> crafttweaker.</span><span class="hljs-section">api.</span><span class="hljs-section">commands.</span><span class="hljs-section">custom.</span>MCSuggestionProvider<span class="hljs-keyword">;</span>
 
-<span class="hljs-comment"># Just another comment</span>
-<span class="hljs-section">User-agent</span>: <span class="hljs-string">Twitterbot</span>
-<span class="hljs-built_in">Allow</span>: <span class="hljs-string">/imgres</span>
 
-<span class="hljs-keyword">Sitemap</span>: <span class="hljs-string">https://www.google.com/sitemap.xml</span>
+<span class="hljs-keyword">var</span> cmd =<span class="hljs-section"> CustomCommands.</span>literal<span class="hljs-title">(</span><span class="hljs-string">&quot;myCommand&quot;</span><span class="hljs-title">)</span>.executes<span class="hljs-title">(</span><span class="hljs-keyword">new</span> MCCommand<span class="hljs-title">(</span>context =&gt; <span class="hljs-title">{</span>
+<span class="hljs-section">	context.</span>getSource<span class="hljs-title">(</span><span class="hljs-title">)</span>.sendFeedback<span class="hljs-title">(</span><span class="hljs-string">&quot;I was called!&quot;</span>, <span class="hljs-keyword">true</span><span class="hljs-title">)</span><span class="hljs-keyword">;</span>
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span><span class="hljs-keyword">;</span>
+<span class="hljs-title">}</span><span class="hljs-title">)</span><span class="hljs-title">)</span><span class="hljs-keyword">;</span>
+
+<span class="hljs-section">
+CustomCommands.</span>registerCommand<span class="hljs-title">(</span>cmd<span class="hljs-title">)</span><span class="hljs-keyword">;</span>
+
+<span class="hljs-keyword">var</span> cmd2 =<span class="hljs-section"> CustomCommands.</span>literal<span class="hljs-title">(</span><span class="hljs-string">&quot;myOtherCommand&quot;</span><span class="hljs-title">)</span>.then<span class="hljs-title">(</span>
+   <span class="hljs-section"> CustomCommands.</span>argument<span class="hljs-title">(</span><span class="hljs-string">&quot;someArgument&quot;</span><span class="hljs-title">)</span>
+        .suggests<span class="hljs-title">(</span><span class="hljs-keyword">new</span> MCSuggestionProvider<span class="hljs-title">(</span><span class="hljs-title">(</span>context, builder<span class="hljs-title">)</span> =&gt;<span class="hljs-section"> builder.</span>suggest<span class="hljs-title">(</span><span class="hljs-section">builder.</span>getRemaining<span class="hljs-title">(</span><span class="hljs-title">)</span> +<span class="hljs-section"> builder.</span>getRemaining<span class="hljs-title">(</span><span class="hljs-title">)</span><span class="hljs-title">)</span>.build<span class="hljs-title">(</span><span class="hljs-title">)</span><span class="hljs-title">)</span><span class="hljs-title">)</span>
+        .executes<span class="hljs-title">(</span><span class="hljs-keyword">new</span> MCCommand<span class="hljs-title">(</span>context =&gt; <span class="hljs-title">{</span>
+                   <span class="hljs-section"> context.</span>getSource<span class="hljs-title">(</span><span class="hljs-title">)</span>.sendFeedback<span class="hljs-title">(</span><span class="hljs-string">&quot;The parameter was &quot;</span> +<span class="hljs-section"> context.</span>getArgument<span class="hljs-title">(</span><span class="hljs-string">&quot;someArgument&quot;</span><span class="hljs-title">)</span>, <span class="hljs-keyword">true</span><span class="hljs-title">)</span><span class="hljs-keyword">;</span>
+                    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><span class="hljs-keyword">;</span>
+                <span class="hljs-title">}</span><span class="hljs-title">)</span><span class="hljs-title">)</span>
+<span class="hljs-title">)</span><span class="hljs-keyword">;</span>
+<span class="hljs-section">
+CustomCommands.</span>registerCommand<span class="hljs-title">(</span>cmd2<span class="hljs-title">)</span><span class="hljs-keyword">;</span>
