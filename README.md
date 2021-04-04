@@ -37,7 +37,7 @@ var hljs = require('highlight.js');
 var hljsZenscript = require('highlightjs-zenscript');
 
 hljs.registerLanguage("zenscript", hljsZenscript);
-hljs.initHighlightingOnLoad();
+hljs.highlightAll();
 ```
 
 
