@@ -1,3 +1,6 @@
+# Replaced by:
+https://github.com/highlightjs/highlightjs-zenscript
+
 # ZenScript - a language grammar for highlight.js
 
 ![version](https://badgen.net/npm/v/highlightjs-zenscript) ![license](https://badgen.net/badge/license/MIT/blue)
